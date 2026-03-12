@@ -16,20 +16,23 @@ const WorkoutPage = () => {
   // - Add an Edit link to /edit-workout/:id
 
   const [workout, setWorkout] = useState(null);
-  useEffect(() => {
-    const fetchWorkout = async () => {
-      const response = await fetch(`/api/workouts/${id}`,{
-        headers: {
-          "Authorization": `Bearer ${localStorage.getItem("token")}`,
-        },
-      });
-      const json = await response.json();
-      if (response.ok) {
-        setWorkout(json);
-      }
-    };
-    fetchWorkout();
-  }, [id]);
+ useEffect(() => {
+  const fetchWorkout = async () => {
+    const response = await fetch(`/api/workouts/${id}`, {
+      headers: {
+        Authorization: `Bearer ${localStorage.getItem("token")}`,
+      },
+    });
+
+    const json = await response.json();
+    if (response.ok) {
+      setWorkout(json);
+    }
+  };
+
+  fetchWorkout();
+}, [id]);
+
 
   const handleDelete = async () => {
     const response = await fetch(`/api/workouts/${id}`, {
