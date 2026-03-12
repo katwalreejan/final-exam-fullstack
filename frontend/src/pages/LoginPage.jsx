@@ -42,7 +42,7 @@ const LoginPage = () => {
           required
         />
         <button disabled={isLoading}>Login</button>
-        {error && <p>style={{color:'red'}}</p>}
+        {error && <p style={{ color: "red" }}>{error}</p>}
 
       </form>
     </div>
