@@ -1,6 +1,11 @@
 import { useState } from "react";
-
+import useLogin from "../hooks/useLogin";
+import { useNavigate } from "react-router-dom";
 const LoginPage = () => {
+
+  const {login, error, isLoading}= useLogin();
+  const navigate= useNavigate();
+
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
 
@@ -12,7 +17,10 @@ const LoginPage = () => {
     // - Display error from the hook if present
     // - Display a loading state on the button using isLoading from the hook
     // - Navigate to "/" on successful login
-    console.log("Login submit:", { username, password });
+    const success= await login(username,password)
+    if(success){
+      navigate("/")
+    }
   };
 
   return (
@@ -33,7 +41,9 @@ const LoginPage = () => {
           onChange={(e) => setPassword(e.target.value)}
           required
         />
-        <button type="submit">Login</button>
+        <button disabled={isLoading}>Login</button>
+        {error && <p>style={{color:'red'}}</p>}
+
       </form>
     </div>
   );
