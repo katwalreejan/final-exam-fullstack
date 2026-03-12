@@ -18,7 +18,11 @@ const WorkoutPage = () => {
   const [workout, setWorkout] = useState(null);
   useEffect(() => {
     const fetchWorkout = async () => {
-      const response = await fetch(`/api/workouts/${id}`);
+      const response = await fetch(`/api/workouts/${id}`,{
+        headers: {
+          "Authorization": `Bearer ${localStorage.getItem("token")}`,
+        },
+      });
       const json = await response.json();
       if (response.ok) {
         setWorkout(json);
@@ -30,6 +34,9 @@ const WorkoutPage = () => {
   const handleDelete = async () => {
     const response = await fetch(`/api/workouts/${id}`, {
       method: "DELETE",
+         headers: {
+        "Authorization": `Bearer ${localStorage.getItem("token")}`,
+      },
     });
     if (response.ok) {
       navigate("/");

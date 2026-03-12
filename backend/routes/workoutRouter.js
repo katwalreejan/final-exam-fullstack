@@ -16,12 +16,12 @@ router.get("/", getAllWorkouts);
 router.post("/", requiteAuth, createWorkout);
 
 // GET /api/workouts/:workoutId
-router.get("/:workoutId", getWorkoutById);
+router.get("/:id", getWorkoutById);
 
 // PUT /api/workouts/:workoutId
-router.put("/:workoutId", requiteAuth, updateWorkout);
+router.put("/:id", requiteAuth, updateWorkout);
 
 // DELETE /api/workouts/:workoutId
-router.delete("/:workoutId", requiteAuth, deleteWorkout);
+router.delete("/:id", requiteAuth, deleteWorkout);
 
 module.exports = router;
